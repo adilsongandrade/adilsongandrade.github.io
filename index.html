@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SENAC SOROCABA - Business Day</title>	     
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .cupom-fiscal {
+            background-color: #ffff99; /* fundo amarelo */
+            color: #000000; /* letras pretas */
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .visita-repetida {
+            background-color: red;
+            color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="mensagem"></div>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var codigo_do_produto = urlParams.get('codigo_do_produto');
+        var produtosVisitados = localStorage.getItem('produtosVisitados') ? JSON.parse(localStorage.getItem('produtosVisitados')) : [];
+
+        if (produtosVisitados.includes(codigo_do_produto)) {
+            document.getElementById('mensagem').innerHTML = '<div class="visita-repetida">Você já registrou sua compra deste item!<br>' + codigo_do_produto + '.</div>';
+        } else {
+            produtosVisitados.push(codigo_do_produto);
+            localStorage.setItem('produtosVisitados', JSON.stringify(produtosVisitados));
+            document.getElementById('mensagem').innerHTML = '<div class="cupom-fiscal"><h1>Business Day</h1><h3>www.sp.senac.br/sorocaba</h3><p>CNPJ: 12.345.678/0001-99</p><h3>CUPOM FISCAL</h3><p>Produto: ' + codigo_do_produto + '</p><p>Quantidade: 1</p><p>Valor: R$ #######,##</p><p>Data: ' + new Date().toLocaleDateString() + '</p><p>Hora: ' + new Date().toLocaleTimeString() + '</p><p>Operador: Peter Drucker</p><h4>**** Mensagem ****<br>Agradecemos sua participação<br> no Business Day!</h4></div>';
+        }
+    </script>
+</body>
+</html>
