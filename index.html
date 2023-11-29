@@ -39,7 +39,7 @@
         var produtosVisitados = localStorage.getItem('produtosVisitados') ? JSON.parse(localStorage.getItem('produtosVisitados')) : [];
 
         if (produtosVisitados.includes(codigo_do_produto)) {
-            document.getElementById('mensagem').innerHTML = '<div class="visita-repetida">Você já registrou sua compra deste item!<br>' + codigo_do_produto + '.</div>';
+            document.getElementById('mensagem').innerHTML = '<div class="visita-repetida">Você já registrou sua compra deste item!<br><br><hr>' + codigo_do_produto + '.</div>';
         } else {
             produtosVisitados.push(codigo_do_produto);
             localStorage.setItem('produtosVisitados', JSON.stringify(produtosVisitados));
